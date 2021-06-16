@@ -3,7 +3,7 @@ ESPhome project to montior sump water depth and air humidity.
 
 ## Background
 Various recurring damp problems under my house, due to drainage problems (now fixed) and high water table.  Ultimately this required two sump pumps to remove water.
-On an ongoing basis, I wanted to measure and log water depth in the sumps, as well as ambient humidty and temperature.
+On an ongoing basis, I wanted to measure and log water depth in the sumps, as well as ambient humidity and temperature.
 
 ## Concept
 Wifi connected water depth meter using ultrasonic transducer and humidity sensor with local display.
