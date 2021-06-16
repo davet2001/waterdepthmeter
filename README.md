@@ -7,15 +7,17 @@ On an ongoing basis, I wanted to measure and log water depth in the sumps, as we
 
 ## Concept
 Wifi connected water depth meter using ultrasonic transducer and humidity sensor with local display.
- - ESP32 to control everything
+ - ESP32 to control everything, using ESP32 Devkit V1 (for easy access to pins, usb port, power regulator etc).
  - Low cost ST7789V 1.14" TFT display
  - DHT11 Temperature/humidty sensor
- - JSN20 depth sensing circuit (used in car reversing sensor)
+ - JSN-SR04T depth sensing circuit (used in car reversing sensor)
  - Custom 3D printed two part housing
  - All mounted inside a standard piece of 50mm OD polycarbonate tube (length of tube can be adjusted to change overall sensing depth).
  - Ultrasonic sensor 'looks' down the tube.
  - USB cable enters through the top of the housing, and provides power.  Also provides facility to communicate with the ESP and re-flash the firmware if the OTA update breaks for whatever reason.
  - Onboard display shows all sensor readings, as well as wifi signal strength (helpful when initially installing or verifying).
+
+The device is intended to be semi-waterproof - at least splash proof from the water depth sensing end.  The humidity sensor is mounted on the outside.
 
 ## Development
 Developed using the following:
