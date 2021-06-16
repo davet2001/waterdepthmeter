@@ -1,5 +1,5 @@
 # Water Depth Meter
-ESPhome project to montior water depth and air humidity
+ESPhome project to montior sump water depth and air humidity.
 
 ## Background
 Various recurring damp problems under my house, due to drainage problems (now fixed) and high water table.  Ultimately this required two sump pumps to remove water.
@@ -17,8 +17,17 @@ Wifi connected water depth meter using ultrasonic transducer and humidity sensor
  - USB cable enters through the top of the housing, and provides power.  Also provides facility to communicate with the ESP and re-flash the firmware if the OTA update breaks for whatever reason.
  - Onboard display shows all sensor readings, as well as wifi signal strength (helpful when initially installing or verifying).
 
-
+## Development
+Developed using the following:
+ - FreeCAD for the mechanical parts and assembly4 addon for the assembly model.
+ - GIMP for the display design
+ - ESPHome for the ESP32 code.
+ - craftcloud.com for the 3D printed parts (first time using them).
 
 This is an enhanced version of a simpler device I produced previously, which had just the JSN20 sensor mounted into a piece of drainpipe, all controlled by a raspberry Pi.
+
+## Status
+This is a work in progress.  Not yet assembled or tested!
+
 
 
