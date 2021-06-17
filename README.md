@@ -24,7 +24,7 @@ Developed using the following:
  - FreeCAD for the mechanical parts and assembly4 addon for the assembly model.
  - GIMP for the display design
  - ESPHome for the ESP32 code.
- - craftcloud.com for the 3D printed parts (first time using them).
+ - craftcloud3d.com for the 3D printed parts (first time using them).
 
 This is an enhanced version of a simpler device I produced previously, which had just the JSN20 sensor mounted into a piece of drainpipe, all controlled by a raspberry Pi.
 
