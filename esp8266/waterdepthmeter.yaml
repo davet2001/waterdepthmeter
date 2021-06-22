@@ -60,18 +60,33 @@ spi:
   clk_pin: GPIO18
   mosi_pin: GPIO19
 
+dallas:
+  - pin: GPIO15
+    update_interval: 10s
+
 sensor:
   - platform: wifi_signal
     name: Wifi SSI
     id: wifi_ssi
     update_interval: 5s
     internal: true
+  - platform: dallas
+    address: 0x8E3C01B556812828
+    name: Temperature
+    id: temperature
+  - platform: template
+    name: "Water Level"
+    id: waterlevel
+    lambda: |-
+      return 300 -(int)(id(temperature).state*10);
+    update_interval: 10s
 
 text_sensor:
   - platform: wifi_info
     ssid:
       name: Connected SSID    
       id: wifi_ssid
+      internal: true
       
 display:
   - platform: st7789v
@@ -86,8 +101,8 @@ display:
       it.printf(108, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_RIGHT, "%s", id(wifi_ssid).state.c_str());
       it.printf(113, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_LEFT, "%.0f", id(wifi_ssi).state);
       it.print(4, 36, id(ubuntu_14), darkblue1, "Water Depth");
-      it.printf(it.get_width()/2, 48, id(ubuntu_74), darkblue1, TextAlign::TOP_CENTER, "%d", 123);
+      it.printf(it.get_width()/2, 48, id(ubuntu_74), darkblue1, TextAlign::TOP_CENTER, "%d", id(waterlevel).state);
       it.print(106, 120, id(ubuntu_14), darkblue1, "mm");
-      it.printf(it.get_width()/2, 148, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f%%RH", 54.3);
-      it.printf(it.get_width()/2, 202, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f°C", 17.8);
-#      it.print(0, 0, id(ubuntu_12), "Hello World!");
+      it.printf(it.get_width()/2, 148, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f%%RH", id(temperature).state);
+      it.printf(it.get_width()/2, 202, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f°C", id(temperature).state);
+
