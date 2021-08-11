@@ -60,33 +60,52 @@ spi:
   clk_pin: GPIO18
   mosi_pin: GPIO19
 
-dallas:
-  - pin: GPIO15
-    update_interval: 10s
-
 sensor:
+  - platform: dht
+    pin: GPIO15
+    temperature:
+      name: "WaterDepth1 Temperature"
+      id: temperature
+    humidity:
+      name: "WaterDepth1 Humidity"
+      id: rh
+    update_interval: 10s
   - platform: wifi_signal
     name: Wifi SSI
     id: wifi_ssi
     update_interval: 5s
-    internal: true
-  - platform: dallas
-    address: 0x8E3C01B556812828
-    name: Temperature
-    id: temperature
+    internal: true 
   - platform: template
-    name: "Water Level"
+    name: "WaterDepth1 Level"
     id: waterlevel
     lambda: |-
-      return 300 -(int)(id(temperature).state*10);
+      float p = id(proximity).state;
+      if (isnan(p)){
+        return NAN;
+      }
+      else {
+        return 300 -(int)(p*10);
+      }
     update_interval: 10s
-
+  - platform: ultrasonic
+    trigger_pin: GPIO13
+    echo_pin: GPIO12
+    internal: true
+    id: proximity 
+    
 text_sensor:
   - platform: wifi_info
     ssid:
       name: Connected SSID    
       id: wifi_ssid
       internal: true
+
+switch:
+  - platform: gpio
+    pin: GPIO4
+    name: "Backlight"
+    restore_mode: ALWAYS_ON     
+    id: backlight
       
 display:
   - platform: st7789v
@@ -94,15 +113,17 @@ display:
     cs_pin: GPIO5
     dc_pin: GPIO16
     reset_pin: GPIO23
+    rotation: 180
+    id: oled
     lambda: |-
       it.fill(lightbrown1);
       it.filled_rectangle(0,0,it.get_width(), 21, darkbrown1);
       it.strftime(1, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_LEFT, "%H:%M", id(esptime).now());
-      it.printf(108, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_RIGHT, "%s", id(wifi_ssid).state.c_str());
-      it.printf(113, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_LEFT, "%.0f", id(wifi_ssi).state);
+      it.printf(104, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_RIGHT, "%s", id(wifi_ssid).state.c_str());
+      it.printf(109, 2, id(ubuntu_14), lightblue1, TextAlign::TOP_LEFT, "%.0f", id(wifi_ssi).state);
       it.print(4, 36, id(ubuntu_14), darkblue1, "Water Depth");
-      it.printf(it.get_width()/2, 48, id(ubuntu_74), darkblue1, TextAlign::TOP_CENTER, "%d", id(waterlevel).state);
-      it.print(106, 120, id(ubuntu_14), darkblue1, "mm");
-      it.printf(it.get_width()/2, 148, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f%%RH", id(temperature).state);
+      it.printf(it.get_width()/2, 48, id(ubuntu_74), darkblue1, TextAlign::TOP_CENTER, "%.0f", id(waterlevel).state);
+      it.print(102, 120, id(ubuntu_14), darkblue1, "mm");
+      it.printf(it.get_width()/2, 148, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.0f%%RH", id(rh).state);
       it.printf(it.get_width()/2, 202, id(ubuntu_30), darkblue1, TextAlign::TOP_CENTER, "%.1f°C", id(temperature).state);
 
