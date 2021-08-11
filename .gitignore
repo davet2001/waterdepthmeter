@@ -15,3 +15,5 @@
 3d/tft_module.FCStd1
 esp8266/waterdepth1/partitions.csv
 esp8266/waterdepthmeter2/partitions.csv
+esp32/waterdepth1/partitions.csv
+esp32/waterdepthmeter2/partitions.csv
