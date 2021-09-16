@@ -13,7 +13,7 @@ Wifi connected water depth meter using ultrasonic transducer and humidity sensor
  - Low cost ST7789V 1.14" TFT display
  - DHT11 Temperature/humidty sensor
  - JSN-SR04T depth sensing circuit (used in car reversing sensor)
- - Custom 3D printed two part housing
+ - Custom 3D printed two part housing (files `shell_a-Body.stl` and `shell_a_lid-Body.stl`).
  - All mounted inside a standard piece of 50mm OD polycarbonate tube (length of tube can be adjusted to change overall sensing depth).
  - Ultrasonic sensor 'looks' down the tube.
  - USB cable enters through the top of the housing, and provides power.  Also provides facility to communicate with the ESP and re-flash the firmware if the OTA update breaks for whatever reason.
