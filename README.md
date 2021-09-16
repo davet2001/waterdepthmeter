@@ -3,7 +3,7 @@ ESPhome project to montior sump water depth and air humidity.
 
 ## Background
 Various recurring damp problems under my house, due to drainage problems (now fixed) and high water table.  Ultimately this required two sump pumps to remove water.
-On an ongoing basis, I wanted to measure and log water depth in the sumps, as well as ambient humidity and temperature.
+On an ongoing basis, I wanted to measure and log water depth in the sumps, as well as ambient humidity and temperature.  Mainly for fun, I decided to go for a semi professional looking device, with a clean look and high build quality.  I also wanted to try out some 3D printing.
 
 ## Concept
 Wifi connected water depth meter using ultrasonic transducer and humidity sensor with local display.
@@ -28,8 +28,23 @@ Developed using the following:
 
 This is an enhanced version of a simpler device I produced previously, which had just the JSN20 sensor mounted into a piece of drainpipe, all controlled by a raspberry Pi.
 
-## Status
-This is a work in progress.  Not yet assembled or tested!
+## Build
+The parts assembled quite well, some small modificaitons were needed to the 3D printed parts.  Holes were drilled in the tube to allow water in/out.
 
+## Initial testing and modifications.
+On first run, the temperature/humidity sensor, wifi and screen, were all working well but the depth sensor was reporting NaN on the screen meaning nothing no valid measurement.  After testing the ultrasonic sensor in several ways unsuccessfully, I decided it was faulty and replaced it.  The new one worked ok when outside of the housing but did not work inside the tube.
 
+## Optimisations
+I had the idea that there might be an echo from the inside of the tube, so I set about trying to eliminate this.  By trial and error with a bit of experimentation, I eventually settled on a tube of felt approx 100mm long, fitted round the inside top of the tube just below the sensor.  This made a huge difference - the readings were consistent and reliable.
 
+In the esphome configuration, I corrected for the length of the tube, so that it would report zero when the water level was at the end of the tube, and positive values as the water rose up the tube.
+
+## What I would change next time
+ - Slightly adjust the dimensions of the lid so that it fits properly.
+ - Taper one end of the lid so that it can be assembled (if you are reproducing this design - don't worrry, some small modificaitons with a knife/sandpaper are enough to resolve this).
+ - The O-rings were ineffective as they didn't sit in the groove properly - this was mostly because I couldn't get the correct size.  In the end the device formed quite a good seal so the o-rings were not so critical.
+ - Come up with a more secure method of fastenning the screen (the pegs aligned it well, but two of them broke and there wan't anything to hold the screen down).
+
+## Overall 
+
+Successful project!  I can 
